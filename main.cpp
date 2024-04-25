@@ -1,4 +1,3 @@
-//saloka
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -95,7 +94,7 @@ void print_insertion_sort(){
   std::fstream sfile("student.txt",ios::in|ios::out);
   if(sfile){
   std::vector<Student>st= read_student_data();
-    ofstream writer_name("SortedByName.txt",ios::out);
+    ofstream writer_name("SortedByName.txt",ios::app);
     insertion_sort_name(st);
     if(writer_name){
         double time_taking_name = measure_time(insertion_sort_name<Student>, st);
@@ -111,7 +110,7 @@ void print_insertion_sort(){
     }
     else cout<<"Error: SortedByName file\n";
     std::cout<<"|||\n";
-    ofstream writer_gpa("SortedByGPA.txt",ios::out);
+    ofstream writer_gpa("SortedByGPA.txt",ios::app);
    insertion_sort_gpa(st);
     if(writer_gpa){
         double time_taking_gpa = measure_time(insertion_sort_gpa<Student>, st);
@@ -226,7 +225,7 @@ void print_shell_sort(){
 std::fstream sfile("student.txt",ios::in|ios::out);
   if(sfile){
   std::vector<Student>st=read_student_data();
-    ofstream writer_name("SortedByName.txt",ios::out);
+    ofstream writer_name("SortedByName.txt",ios::app);
     shell_sort_name(st);
     if(writer_name){
         double time_taking_name = measure_time(shell_sort_name<Student>, st);
@@ -242,7 +241,7 @@ std::fstream sfile("student.txt",ios::in|ios::out);
     }
     else cout<<"Error: SortedByName file\n";
     std::cout<<"|||\n";
-    ofstream writer_gpa("SortedByGPA.txt",ios::out);
+    ofstream writer_gpa("SortedByGPA.txt",ios::app);
    shell_sort_gpa(st);
     if(writer_gpa){
         double time_taking_gpa = measure_time(shell_sort_gpa<Student>, st);
@@ -265,7 +264,7 @@ void print_Bubble_sort() {
     std::fstream sfile("student.txt", ios::in | ios::out);
     if (sfile) {
         std::vector<Student>st = read_student_data();
-        ofstream writer_name("SortedByName.txt", ios::out);
+        ofstream writer_name("SortedByName.txt", ios::app);
        Bubble_sort_name(st);
         if (writer_name) {
             double time_taking_name = measure_time(Bubble_sort_name<Student>, st);
@@ -281,7 +280,7 @@ void print_Bubble_sort() {
         }
         else cout << "Error: SortedByName file\n";
         std::cout << "|||\n";
-        ofstream writer_gpa("SortedByGPA.txt", ios::out);
+        ofstream writer_gpa("SortedByGPA.txt", ios::app);
         Bubble_sort_gpa(st);
         if (writer_gpa) {
             double time_taking_gpa = measure_time(Bubble_sort_gpa<Student>, st);
@@ -304,7 +303,7 @@ void print_selection_sort(){
 fstream sfile("student.txt",ios::in|ios::out);
   if(sfile){
     vector<Student> st = read_student_data();
-    ofstream writer_gpa("SortedByGPA.txt",ios::out);
+    ofstream writer_gpa("SortedByGPA.txt",ios::app);
     selection_sort_descending(st);
     if(writer_gpa){
         double time_taking_gpa = measure_time(selection_sort_descending<Student>, st);
@@ -323,7 +322,7 @@ fstream sfile("student.txt",ios::in|ios::out);
     }
     else cout<<"Error: SortedDescending file\n ||| \n";
 
-    ofstream writer_name("SortedByName.txt",ios::out);
+    ofstream writer_name("SortedByName.txt",ios::app);
     selection_sort_ascending(st);
     if(writer_name){
         double time_taking_name = measure_time(selection_sort_ascending<Student>, st);
