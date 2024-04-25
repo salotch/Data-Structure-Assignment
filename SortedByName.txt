@@ -1,5 +1,5 @@
 Algorithm: Shell Sort
-Running Time: 2.7e-06 seconds
+Running Time: 2.8e-06 seconds
 Ali
 3541
 3.5

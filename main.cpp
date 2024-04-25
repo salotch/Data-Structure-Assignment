@@ -1,3 +1,4 @@
+//saloka
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -157,7 +158,7 @@ void selection_sort_descending(vector<T>& arr){//from higher to lower
 }
 template<class T>
 void Bubble_sort_gpa(std::vector<T>& arr) {
-    int n = arr.size(), j;
+    int n = arr.size();
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {
@@ -175,7 +176,7 @@ void Bubble_sort_gpa(std::vector<T>& arr) {
 }
 template<class T>
 void Bubble_sort_name(std::vector<T>& arr) {
-    int n = arr.size(), j;
+    int n = arr.size();
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {

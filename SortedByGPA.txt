@@ -1,5 +1,5 @@
 Algorithm: shell Sort
-Running Time: 3.4e-06 seconds
+Running Time: 3e-06 seconds
 Mariam
 69712
 3.7
