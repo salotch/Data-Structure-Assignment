@@ -276,6 +276,8 @@ void shell_sort_name(vector<T>& arr){
         }
     }
 }
+int Merge_GPA_comparisons=0;
+int Merge_Name_comparisons=0;
 template<class T>
 void merge_name(vector<T>& arr,int left,int middle,int right) {
     int n1=middle-left+1;//+1 to avoid if two array not equle each other
@@ -284,21 +286,26 @@ void merge_name(vector<T>& arr,int left,int middle,int right) {
     vector<T>r(n2);
     for(int i=0;i<n1;i++)
     {
+        Merge_Name_comparisons++;
         l[i]=arr[left+i];
     }
     for(int j=0;j<n2;j++)
     {
+        Merge_Name_comparisons++;
         r[j]=arr[middle+1+j];
     }
     int i=0,j=0;
     int k=left;
     while(i<n1&&j<n2)
     {
+        Merge_Name_comparisons+=2;
         if(l[i]<=r[j]){
+            Merge_Name_comparisons++;
             arr[k]=l[i];
             ++i;
         }
         else{
+            Merge_Name_comparisons++;
             arr[k]=r[j];
             j++;
         }
@@ -306,12 +313,14 @@ void merge_name(vector<T>& arr,int left,int middle,int right) {
     }
     while(i<n1)
     {
+        Merge_Name_comparisons++;
         arr[k]=l[i];
         ++k;
         ++i;
     }
     while(j<n2)
     {
+        Merge_Name_comparisons++;
         arr[k]=r[j];
         ++k;
         ++j;
@@ -326,21 +335,26 @@ void merge_Gpa(vector<T>& arr,int left,int middle,int right) {
     vector<T>r(n2);
     for(int i=0;i<n1;i++)
     {
+        Merge_GPA_comparisons++;
         l[i]=arr[left+i];
     }
     for(int j=0;j<n2;j++)
     {
+        Merge_GPA_comparisons++;
         r[j]=arr[middle+1+j];
     }
     int i=0,j=0;
     int k=left;
     while(i<n1&&j<n2)
     {
+        Merge_GPA_comparisons+=2;
         if(l[i]>=r[j]){
+            Merge_GPA_comparisons++;
             arr[k]=l[i];
             ++i;
         }
         else{
+            Merge_GPA_comparisons++;
             arr[k]=r[j];
             j++;
         }
@@ -348,12 +362,14 @@ void merge_Gpa(vector<T>& arr,int left,int middle,int right) {
     }
     while(i<n1)
     {
+        Merge_GPA_comparisons++;
         arr[k]=l[i];
         ++k;
         ++i;
     }
     while(j<n2)
     {
+        Merge_GPA_comparisons++;
         arr[k]=r[j];
         ++k;
         ++j;
@@ -364,6 +380,7 @@ void merge_Gpa(vector<T>& arr,int left,int middle,int right) {
 template<class T>
 void merge_Sort_name(vector<T>& arr,int left,int right) {
     if(left<right){
+        Merge_Name_comparisons++;
         int m;
         m=left+(right-left)/2;//-1 to reach to base case
         merge_Sort_name(arr,left,m);
@@ -376,6 +393,7 @@ void merge_Sort_name(vector<T>& arr,int left,int right) {
 template<class T>
 void merge_Sort_Gpa(vector<T>& arr,int left,int right) {
     if(left<right){
+        Merge_GPA_comparisons++;
         int m;
         m=left+(right-left)/2;//+left to know idex after we know middle
         merge_Sort_Gpa(arr,left,m);
@@ -398,6 +416,8 @@ fstream sfile("student.txt",ios::in|ios::out);
             cout<<"Algorithm: Merge Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
             writer_name<<"Algorithm: Merge Sort\n";
             writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
+            std::cout << "Number of comparisons in merge sort by name: " << Merge_Name_comparisons<< std::endl;
+            writer_name<<"Number of comparisons in merge sort by name: " <<  Merge_Name_comparisons << std::endl;
             for (auto& it : st) {
                 cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_name<< it.get_name() << endl;
@@ -414,6 +434,8 @@ fstream sfile("student.txt",ios::in|ios::out);
             cout<<"Algorithm: Merge Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
             writer_gpa<<"Algorithm: Merge Sort\n";
             writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+            std::cout << "Number of comparisons in merge sort by name: " << Merge_GPA_comparisons<< std::endl;
+            writer_name<<"Number of comparisons in merge sort by name: " <<  Merge_GPA_comparisons << std::endl;
             for (auto& it : st) {
             cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_gpa<< it.get_name() << endl;
