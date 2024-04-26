@@ -513,6 +513,116 @@ fstream sfile("student.txt",ios::in|ios::out);
     else cout<<"Error: student file\n";
     sfile.close();
 }
+
+template<class t>
+void quick_gpa_des(vector<t>& arr,ll l, ll h){
+    if(l<h){
+        ll p=partitioning_quick_gpa_des(arr,l,h);
+        quick_gpa_des(arr,l,p-1);
+        quick_gpa_des(arr,p+1,h);
+    }
+}
+template<class t>
+void quick_name(vector<t>& arr,ll l, ll h){
+    if(l<h){
+        ll p=partitioning_quick_name(arr,l,h);
+        quick_name(arr,l,p-1);
+        quick_name(arr,p+1,h);
+    }
+}
+
+template<class t>
+ll partitioning_quick_gpa_des(vector<t>& arr,ll start, ll end){
+    ll i=start ;
+    ll j=end;
+    ll pivot =i;
+    while(true)
+    {
+        if(i>=j)
+        {swap(arr[pivot],arr[j]);
+            break;
+        }
+        while(arr[i]>arr[pivot])
+            i++;
+        while(arr[pivot]>arr[j])
+            j--;
+        swap(arr[i],arr[j]);
+    }
+    return pivot;
+}
+template<class t>
+ll partitioning_quick_name(vector<t>& arr,ll start, ll end){
+    ll i=start ;
+    ll j=end;
+    ll pivot =i;
+    while(true)
+    {
+        if(i>=j)
+        {
+            swap(arr[pivot],arr[j]);
+            break;
+        }
+        while(arr[i]<arr[pivot])
+            i++;
+        while(arr[pivot]<arr[j])
+            j--;
+        swap(arr[i],arr[j]);
+    }
+    return pivot;
+}
+//quick
+
+void print_quick_sort(){
+    int abdo=1;
+    fstream sfile("student.txt",ios::in|ios::out);
+    if(sfile){
+        vector<Student> st = read_student_data();
+        ofstream writer_gpa("SortedByGPA.txt",ios::app);
+        ll k=st.size();
+
+        quick_gpa_des(st,0,k-1);
+        if(writer_gpa){
+            double time_taking_gpa = measure_time(quick_gpa_des<Student>, st,0,k-1);
+
+            cout << "Algorithm: quick Sort by GPA \n" << "Running Time: " << time_taking_gpa << " seconds\n";
+
+            writer_gpa << "Algorithm: quick Sort by GPA \n";
+            writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
+
+            for (auto& it : st) {
+
+                cout << it.get_name() << endl << it.get_id() << endl << it.get_gpa() << endl<<endl;
+                writer_gpa  << it.get_name() << endl;
+                writer_gpa << it.get_id() << endl;
+                writer_gpa << it.get_gpa() << endl;
+
+            } writer_gpa.close();
+        }
+        else cout<<"Error: SortedDescending file\n ||| \n";
+
+        fstream writer_name("SortedByName.txt",ios::app);
+        quick_name(st,0,k-1);
+        if(writer_name){
+            double time_taking_name = measure_time(quick_name<Student>, st,0,k-1);
+            cout << "Algorithm: quick Sort by name\n"<< "Running Time: " << time_taking_name << " seconds\n";
+
+            writer_name << "Algorithm: quick Sort by name\n";
+            writer_name << "Running Time: "<<time_taking_name<<" seconds\n";
+            for (auto& it : st) {
+
+                cout << it.get_name() << endl << it.get_id() << endl << it.get_gpa() << endl<<endl;
+                writer_name << it.get_name() << endl;
+                writer_name << it.get_id() << endl;
+                writer_name << it.get_gpa() << endl;
+            }
+            writer_name.close();
+        }
+        else cout<<"Error: SortedAscending file\n";
+    }
+    else cout<<"Error: student file\n";
+    sfile.close();
+
+}
 int main()
 {
    print_insertion_sort();
@@ -520,4 +630,7 @@ int main()
    print_Bubble_sort();
    print_shell_sort();
    print_merge_sort();
+   print_quick_sort();
+
 }
+
