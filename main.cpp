@@ -161,12 +161,16 @@ void print_insertion_sort(){
     else cout<<"Error: student file\n";
     sfile.close();
 }
+int selection_name_count_Comp = 0;
+int selection_gpa_count_Comp = 0;
 template<class T>
 void selection_sort_ascending(vector<T>& arr){
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
+        selection_name_cnt_Comp++;
         int mini = i;
         for (int j = i + 1; j < n; j++) {
+            selection_name_cnt_Comp++;
             if (arr[j] < arr[mini]) {
             mini = j;
             }
@@ -178,10 +182,12 @@ template<class T>
 void selection_sort_descending(vector<T>& arr){
     int n = arr.size(), j;
     for (int i = 0; i < n - 1; i++) {
-        int mini = i;
+        selection_gpa_count_Comp++;
+        int maxx = i;
         for ( j = i + 1; j < n; j++) {
-            if (arr[j] > arr[mini]) {
-            mini = j;
+            selection_gpa_count_Comp++;
+            if (arr[j] > arr[maxx]) {
+            maxx = j;
             }
         }
     swap(arr[i], arr[mini]);
@@ -517,7 +523,8 @@ fstream sfile("student.txt",ios::in|ios::out);
 
         writer_gpa << "Algorithm: selection Sort by GPA \n";
         writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
-
+            std::cout << "Number of comparisons in Selection sort by GPA: " << selection_gpa_count_Comp << std::endl;
+            writer_gpa<<"Number of comparisons in Selection sort by GPA: " << selection_gpa_count_Comp << std::endl;
         for (auto& it : st) {
             cout << it.get_name() << endl << it.get_id() << endl << it.get_gpa() << endl<<endl;
             writer_gpa  << it.get_name() << endl;
@@ -535,6 +542,8 @@ fstream sfile("student.txt",ios::in|ios::out);
 
         writer_name << "Algorithm: selection Sort by name\n";
         writer_name << "Running Time: "<<time_taking_name<<" seconds\n";
+            std::cout << "Number of comparisons in selection sort by name: " << selection_name_count_Comp << std::endl;
+            writer_name<<"Number of comparisons in selection sort by name: " << selection_name_count_Comp << std::endl;
         for (auto& it : st) {
             cout << it.get_name() << endl << it.get_id() << endl << it.get_gpa() << endl<<endl;
             writer_name << it.get_name() << endl;
