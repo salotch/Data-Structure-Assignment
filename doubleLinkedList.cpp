@@ -219,9 +219,33 @@ public:
         for(int i = 0; i < secondItemIdx; i++)
             secondNode = secondNode->next;
 
-        T temp = firstNode->data;
-        firstNode->data = secondNode->data;
-        secondNode->data = temp;
+        if (firstNode == head)
+            head = secondNode;
+        else if (secondNode == head)
+            head = firstNode;
+        if (firstNode == tail)
+            tail = secondNode;
+        else if (secondNode == tail)
+            tail = firstNode;
+
+        node<T>* temp;
+        temp = firstNode->next;
+        firstNode->next = secondNode->next;
+        secondNode->next = temp;
+
+        if (firstNode->next != NULL)
+            firstNode->next->prev = firstNode;
+        if (secondNode->next != NULL)
+            secondNode->next->prev = secondNode;
+
+        temp = firstNode->prev;
+        firstNode->prev = secondNode->prev;
+        secondNode->prev = temp;
+
+        if (firstNode->prev != NULL)
+            firstNode->prev->next = firstNode;
+        if (secondNode->prev != NULL)
+            secondNode->prev->next = secondNode;
     }
 
     bool isEmpty(){
@@ -257,10 +281,11 @@ int main()
 {
     doubleLinkedList<int> dll;
     dll.insertAtHead(1);
-    dll.insertAtTail(2);
     dll.insertAtTail(3);
+    dll.insertAtTail(2);
+    dll.Swap(1, 2);
     dll.insertAtTail(5);
-    dll.insertAt(4, 3);
+    dll.insertAt(4, 2);
     dll.print(); // Output: 1 2 3 4 5
     cout << "Size: " << dll.DLL_is_size() << endl; // Output: 3
     dll.removeAt(1);
@@ -270,7 +295,7 @@ int main()
     cout << "Is 3 in the list: " << dll.isExist(3) << endl; // Output: 1 (true)
     cout << "Is element at index 1 equal to 3: " << dll.isItemAtEqual(3, 1) << endl; // Output: 1 (true)
     dll.Swap(0, 1);
-    dll.print(); // Output: 3 1
+    dll.print(); // Output: 3 1 5 4
     dll.Clear();
     cout << "Is the list empty: " << dll.isEmpty() << endl; // Output: 1 (true)
     return 0;
