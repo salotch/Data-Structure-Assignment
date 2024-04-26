@@ -285,7 +285,7 @@ int main()
     dll.insertAtTail(2);
     dll.Swap(1, 2);
     dll.insertAtTail(5);
-    dll.insertAt(4, 3);
+    dll.insertAt(4, 2);
     dll.print(); // Output: 1 2 3 4 5
     cout << "Size: " << dll.DLL_is_size() << endl; // Output: 3
     dll.removeAt(1);
