@@ -93,10 +93,11 @@ void circularlinkedlist<T>::insertAtTail(T newitem)
 template <class T>
 void circularlinkedlist<T>::insertAt(T newitem, int index)
 {
-    if (index < 0)
+    int size = linkedListSize();
+    if (index < 0 || index > size)
     {
-        cout << "index unavailable" << endl;
-        ;
+        cout << "out of range\n";
+        return;
     }
 
     if (index == 0)
@@ -105,25 +106,11 @@ void circularlinkedlist<T>::insertAt(T newitem, int index)
         return;
     }
 
-    node<T>* newNode = new node<T>;
+    node<T> *newNode = new node<T>;
     newNode->info = newitem;
     newNode->next = nullptr;
 
-    if (isEmpty())
-    {
-        last = newNode;
-        last->next = newNode;
-        return;
-    }
-
-    int size = linkedListSize();
-    if (index > size)
-    {
-        cout << "out of range" << endl;
-        ;
-    }
-
-    node<T>* current = last->next;
+    node<T> *current = last->next;
     for (int i = 0; i < index - 1; ++i)
     {
         current = current->next;
