@@ -82,15 +82,18 @@ double measure_time(Func func, vector<T>& arr,int l,int r) {
     chrono::duration<double> duration = end - start; // Calculate the time difference in milliseconds
     return duration.count();
 }
+int comparison_insertion_gpa=0;
+int comparison_insertion_name=0;
 template<class T>
 void insertion_sort_gpa(vector<T>& arr) {
     int n = arr.size();
-    if (n <= 1) return; // No need to sort if there is only one element or less
     int j;
     for (int i = 1; i < n; i++) {
+        comparison_insertion_gpa++;
         T key = arr[i];
         j = i - 1;
         while (j >= 0 && key > arr[j]) {
+            comparison_insertion_gpa+=2;
             arr[j + 1] = arr[j];
             j--;
         }
@@ -102,9 +105,11 @@ void insertion_sort_name(vector<T>& arr) {
     int n = arr.size();
     int j;
     for (int i = 1; i < n; i++) {
+            comparison_insertion_name++;
         T key = arr[i];
         j = i - 1;
         while (j >= 0 && key < arr[j]) {
+            comparison_insertion_name+=2;
             arr[j + 1] = arr[j];
             j--;
         }
@@ -122,6 +127,9 @@ void print_insertion_sort(){
         cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
         writer_name<<"Algorithm: Insertion Sort\n";
         writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
+         std::cout << "Number of comparisons in insertion sort by name: " << comparison_insertion_name << std::endl;
+        writer_name<<"Number of comparisons in insertion sort by name: " << comparison_insertion_name << std::endl;
+
     for (auto& it : st) {
         cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_name<< it.get_name() << endl;
@@ -138,6 +146,8 @@ void print_insertion_sort(){
         cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
         writer_gpa<<"Algorithm: Insertion Sort\n";
         writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+        std::cout << "Number of comparisons in insertion sort by GPA: " << comparison_insertion_gpa << std::endl;
+        writer_gpa<<"Number of comparisons in insertion sort by GPA: " << comparison_insertion_gpa << std::endl;
     for (auto& it : st) {
        cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_gpa<< it.get_name() << endl;
@@ -176,22 +186,27 @@ void selection_sort_descending(vector<T>& arr){//from higher to lower
     swap(arr[i], arr[mini]);
     }
 }
+
+int Bubble_GPA_comparisons=0;
+int Bubble_Name_comparisons=0;
 template<class T>
 void Bubble_sort_gpa(vector<T>& arr) {
     int n = arr.size();
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {
+        Bubble_GPA_comparisons++;
     for (int j = 0; j < n - i - 1; j++)
-    {
+    {    Bubble_GPA_comparisons++;
         if (arr[j+1] > arr[j])
-        {
+        {   Bubble_GPA_comparisons++;
             swap(arr[j], arr[j + 1]);
             flag = false;
         }
     }
     if (flag == true)
-        break;
+      {   Bubble_GPA_comparisons++;
+        break;}
 }
 }
 template<class T>
@@ -200,26 +215,33 @@ void Bubble_sort_name(vector<T>& arr) {
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {
+        Bubble_Name_comparisons++;
         for (int j = 0; j < n - i - 1; j++)
-        {
+        {  Bubble_Name_comparisons++;
             if (arr[j+1] < arr[j])
-            {
+            { Bubble_Name_comparisons++;
                 swap(arr[j], arr[j + 1]);
                 flag = false;
             }
         }
          if (flag == true)
-            break;
+          { Bubble_Name_comparisons++;
+             break;}
     }
 }
+int comparison_shell_name=0;
+int comparison_shell_gpa=0;
 template<class T>
 void shell_sort_gpa(vector<T>& arr){
    int n = arr.size(),j;
    for(int gap=n/2;gap>0;gap/=2){
+        comparison_shell_gpa++;
     for(int i=gap;i<n;i++){
+        comparison_shell_gpa++;
         T temp=arr[i];
         j=i;
         while(j>=gap&&temp>arr[j-gap]){
+            comparison_shell_gpa+=2;
             arr[j]=arr[j-gap];
             j-=gap;
         }
@@ -231,10 +253,13 @@ template<class T>
 void shell_sort_name(vector<T>& arr){
    int n = arr.size(),j;
    for(int gap=n/2;gap>0;gap/=2){
+        comparison_shell_name++;
     for(int i=gap;i<n;i++){
+        comparison_shell_name++;
         T temp=arr[i];
         j=i;
         while(j>=gap&&temp<arr[j-gap]){
+            comparison_shell_name+=2;
             arr[j]=arr[j-gap];
             j-=gap;
         }
@@ -403,7 +428,9 @@ fstream sfile("student.txt",ios::in|ios::out);
         cout<<"Algorithm: Shell Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
         writer_name<<"Algorithm: Shell Sort\n";
         writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
-    for (auto& it : st) {
+           std::cout << "Number of comparisons in shell sort by name: " << comparison_shell_name << std::endl;
+          writer_name<<"Number of comparisons in shell sort by name: " << comparison_shell_name << std::endl;
+         for (auto& it : st) {
         cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_name<< it.get_name() << endl;
         writer_name<< it.get_id() << endl;
@@ -419,7 +446,9 @@ fstream sfile("student.txt",ios::in|ios::out);
         cout<<"Algorithm: shell Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
         writer_gpa<<"Algorithm: shell Sort\n";
         writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
-    for (auto& it : st) {
+        std::cout << "Number of comparisons in shell sort by GPA: " << comparison_shell_gpa << std::endl;
+        writer_gpa<<"Number of comparisons in shell sort by GPA: " << comparison_shell_gpa << std::endl;
+       for (auto& it : st) {
        cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_gpa<< it.get_name() << endl;
         writer_gpa<< it.get_id() << endl;
@@ -442,6 +471,8 @@ void print_Bubble_sort() {
             cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_name << " seconds\n";
             writer_name << "Algorithm: Bubble Sort\n";
             writer_name << "Running Time: " << time_taking_name << " seconds\n";
+            std::cout << "Number of comparisons in Bubble sort by name: " << Bubble_Name_comparisons << std::endl;
+          writer_name<<"Number of comparisons in Bubble sort by name: " << Bubble_Name_comparisons << std::endl;
             for (auto& it : st) {
                 cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_name << it.get_name() << endl;
@@ -458,6 +489,8 @@ void print_Bubble_sort() {
             cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_gpa << " seconds\n";
             writer_gpa << "Algorithm: Bubble Sort\n";
             writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
+            std::cout << "Number of comparisons in Bubble sort by GPA: " << Bubble_GPA_comparisons << std::endl;
+          writer_name<<"Number of comparisons in Bubble sort by GPA: " << Bubble_GPA_comparisons << std::endl;
             for (auto& it : st) {
                 cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_gpa << it.get_name() << endl;
@@ -633,4 +666,3 @@ int main()
    print_quick_sort();
 
 }
-
