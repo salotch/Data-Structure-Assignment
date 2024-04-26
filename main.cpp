@@ -135,11 +135,11 @@ void print_insertion_sort(){
                 writer_name<< it.get_gpa() << endl;
             }
         }
-        else 
+        else
         cout<<"Error: SortedByName file\n";
-        
+
         cout<<"|||\n";
-        
+
         ofstream writer_gpa("SortedByGPA.txt",ios::app);
         insertion_sort_gpa(st);
         if(writer_gpa){
@@ -167,10 +167,10 @@ template<class T>
 void selection_sort_ascending(vector<T>& arr){
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
-        selection_name_cnt_Comp++;
+        selection_name_count_Comp++;
         int mini = i;
         for (int j = i + 1; j < n; j++) {
-            selection_name_cnt_Comp++;
+            selection_name_count_Comp++;
             if (arr[j] < arr[mini]) {
             mini = j;
             }
@@ -190,7 +190,7 @@ void selection_sort_descending(vector<T>& arr){
             maxx = j;
             }
         }
-    swap(arr[i], arr[mini]);
+    swap(arr[i], arr[maxx]);
     }
 }
 
