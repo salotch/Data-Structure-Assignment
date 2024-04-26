@@ -9,6 +9,8 @@
 #include <chrono>
 #define ll long long
 using namespace std;
+ll quicksort_com_n=0;
+ll quicksort_com_g=0;
 class Student{
 private:
     string name,id;
@@ -585,10 +587,29 @@ ll partitioning_quick_gpa_des(vector<t>& arr,ll start, ll end){
         {swap(arr[pivot],arr[j]);
             break;
         }
-        while(arr[i]>arr[pivot])
-            i++;
-        while(arr[pivot]>arr[j])
-            j--;
+        while(true)
+        {
+            if(arr[i]>arr[pivot])
+            {   i++;
+                quicksort_com_g++;
+            }
+            else
+            {
+                quicksort_com_g++;
+                break;
+            }
+        }
+        while(true)
+        {
+            if(arr[pivot]>arr[j]) {
+                j--;
+                quicksort_com_g++;
+            }else
+            {
+                quicksort_com_g++;
+                break;
+            }
+        }
         swap(arr[i],arr[j]);
     }
     return pivot;
@@ -605,10 +626,27 @@ ll partitioning_quick_name(vector<t>& arr,ll start, ll end){
             swap(arr[pivot],arr[j]);
             break;
         }
-        while(arr[i]<arr[pivot])
+        while(true)
+        {
+        if(arr[i]<arr[pivot]) {
             i++;
-        while(arr[pivot]<arr[j])
-            j--;
+            quicksort_com_n++;}
+        else
+        {
+            quicksort_com_n++;
+            break;}
+        }
+        while(true)
+        {
+            if(arr[pivot]<arr[j])
+            {   j--;
+                quicksort_com_n++;}
+            else
+            {
+                quicksort_com_n++;
+                break;
+            }
+        }
         swap(arr[i],arr[j]);
     }
     return pivot;
@@ -628,9 +666,11 @@ void print_quick_sort(){
             double time_taking_gpa = measure_time(quick_gpa_des<Student>, st,0,k-1);
 
             cout << "Algorithm: quick Sort by GPA \n" << "Running Time: " << time_taking_gpa << " seconds\n";
+            cout<<"Number of comparisons: "<<quicksort_com_g<<"\n";
 
             writer_gpa << "Algorithm: quick Sort by GPA \n";
             writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
+            writer_gpa <<"Number of comparisons: "<<quicksort_com_g<<"\n" ;
 
             for (auto& it : st) {
 
@@ -648,9 +688,12 @@ void print_quick_sort(){
         if(writer_name){
             double time_taking_name = measure_time(quick_name<Student>, st,0,k-1);
             cout << "Algorithm: quick Sort by name\n"<< "Running Time: " << time_taking_name << " seconds\n";
+            cout<<"Number of comparisons: "<<quicksort_com_n<<"\n";
 
             writer_name << "Algorithm: quick Sort by name\n";
             writer_name << "Running Time: "<<time_taking_name<<" seconds\n";
+            writer_gpa <<"Number of comparisons: "<<quicksort_com_n<<"\n" ;
+
             for (auto& it : st) {
 
                 cout << it.get_name() << endl << it.get_id() << endl << it.get_gpa() << endl<<endl;

@@ -1,89 +1,5 @@
 Algorithm: Insertion Sort
 Running Time: 2.6e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: selection Sort by name
-Running Time: 4.4e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Bubble Sort
-Running Time: 1.4e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Shell Sort
-Running Time: 6.8e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Merge Sort
-Running Time: 3.07e-05 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: quick Sort by name
-Running Time: 1.82e-05 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Insertion Sort
-Running Time: 9.8e-06 seconds
 Number of comparisons in insertion sort by name: 12
 Ali
 3541
@@ -98,7 +14,8 @@ Sara Ahmed
 78697
 3.1
 Algorithm: selection Sort by name
-Running Time: 2.9e-06 seconds
+Running Time: 4.2e-06 seconds
+Number of comparisons in selection sort by name: 18
 Ali
 3541
 3.5
@@ -112,95 +29,7 @@ Sara Ahmed
 78697
 3.1
 Algorithm: Bubble Sort
-Running Time: 7e-07 seconds
-Number of comparisons in shell sort by name: 17
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Number of comparisons in shell sort by GPA: 16
-Algorithm: Shell Sort
-Running Time: 2e-06 seconds
-Number of comparisons in shell sort by name: 20
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Merge Sort
-Running Time: 6.9e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: quick Sort by name
-Running Time: 2.9e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Insertion Sort
 Running Time: 1e-06 seconds
-Number of comparisons in insertion sort by name: 12
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: selection Sort by name
-Running Time: 2.7e-06 seconds
-Ali
-3541
-3.5
-Mariam
-69712
-3.7
-Mohamed Kamal
-97848
-2.2
-Sara Ahmed
-78697
-3.1
-Algorithm: Bubble Sort
-Running Time: 5e-07 seconds
 Number of comparisons in Bubble sort by name: 17
 Ali
 3541
@@ -216,7 +45,7 @@ Sara Ahmed
 3.1
 Number of comparisons in Bubble sort by GPA: 16
 Algorithm: Shell Sort
-Running Time: 1.4e-06 seconds
+Running Time: 7.5e-06 seconds
 Number of comparisons in shell sort by name: 20
 Ali
 3541
@@ -231,7 +60,7 @@ Sara Ahmed
 78697
 3.1
 Algorithm: Merge Sort
-Running Time: 1e-05 seconds
+Running Time: 2.96e-05 seconds
 Ali
 3541
 3.5
@@ -245,7 +74,274 @@ Sara Ahmed
 78697
 3.1
 Algorithm: quick Sort by name
-Running Time: 9.8e-06 seconds
+Running Time: 2.91e-05 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Insertion Sort
+Running Time: 2.9e-06 seconds
+Number of comparisons in insertion sort by name: 12
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: selection Sort by name
+Running Time: 4.3e-06 seconds
+Number of comparisons in selection sort by name: 18
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Bubble Sort
+Running Time: 2e-06 seconds
+Number of comparisons in Bubble sort by name: 17
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Number of comparisons in Bubble sort by GPA: 16
+Algorithm: Shell Sort
+Running Time: 7.3e-06 seconds
+Number of comparisons in shell sort by name: 20
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Merge Sort
+Running Time: 2.97e-05 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: quick Sort by name
+Running Time: 6.3e-06 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Insertion Sort
+Running Time: 3e-06 seconds
+Number of comparisons in insertion sort by name: 12
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: selection Sort by name
+Running Time: 4.2e-06 seconds
+Number of comparisons in selection sort by name: 18
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Bubble Sort
+Running Time: 2.4e-06 seconds
+Number of comparisons in Bubble sort by name: 17
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Number of comparisons in Bubble sort by GPA: 16
+Algorithm: Shell Sort
+Running Time: 3.6e-06 seconds
+Number of comparisons in shell sort by name: 20
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Merge Sort
+Running Time: 1.43e-05 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: quick Sort by name
+Running Time: 6.8e-06 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Insertion Sort
+Running Time: 2.5e-06 seconds
+Number of comparisons in insertion sort by name: 12
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: selection Sort by name
+Running Time: 7.9e-06 seconds
+Number of comparisons in selection sort by name: 18
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Bubble Sort
+Running Time: 1e-06 seconds
+Number of comparisons in Bubble sort by name: 17
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Number of comparisons in Bubble sort by GPA: 16
+Algorithm: Shell Sort
+Running Time: 4.3e-06 seconds
+Number of comparisons in shell sort by name: 20
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: Merge Sort
+Running Time: 2.61e-05 seconds
+Ali
+3541
+3.5
+Mariam
+69712
+3.7
+Mohamed Kamal
+97848
+2.2
+Sara Ahmed
+78697
+3.1
+Algorithm: quick Sort by name
+Running Time: 1.47e-05 seconds
 Ali
 3541
 3.5
