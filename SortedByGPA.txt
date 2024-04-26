@@ -1,5 +1,5 @@
 Algorithm: Insertion Sort
-Running Time: 2.5e-06 seconds
+Running Time: 5e-07 seconds
 Mariam
 69712
 3.7
@@ -13,20 +13,6 @@ Mohamed Kamal
 97848
 2.2
 Algorithm: selection Sort by GPA 
-Running Time: 3.6e-06 seconds
-Mariam
-69712
-3.7
-Ali
-3541
-3.5
-Sara Ahmed
-78697
-3.1
-Mohamed Kamal
-97848
-2.2
-Algorithm: Bubble Sort
 Running Time: 8e-07 seconds
 Mariam
 69712
@@ -40,8 +26,36 @@ Sara Ahmed
 Mohamed Kamal
 97848
 2.2
+Algorithm: Bubble Sort
+Running Time: 2e-07 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
 Algorithm: shell Sort
-Running Time: 4e-06 seconds
+Running Time: 6e-07 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Merge Sort
+Running Time: 3.7e-06 seconds
 Mariam
 69712
 3.7
@@ -55,7 +69,7 @@ Mohamed Kamal
 97848
 2.2
 Algorithm: Insertion Sort
-Running Time: 2.6e-06 seconds
+Running Time: 4e-07 seconds
 Mariam
 69712
 3.7
@@ -69,7 +83,7 @@ Mohamed Kamal
 97848
 2.2
 Algorithm: selection Sort by GPA 
-Running Time: 5.8e-06 seconds
+Running Time: 6e-07 seconds
 Mariam
 69712
 3.7
@@ -83,7 +97,7 @@ Mohamed Kamal
 97848
 2.2
 Algorithm: Bubble Sort
-Running Time: 1.6e-06 seconds
+Running Time: 2e-07 seconds
 Mariam
 69712
 3.7
@@ -97,7 +111,21 @@ Mohamed Kamal
 97848
 2.2
 Algorithm: shell Sort
-Running Time: 5.1e-06 seconds
+Running Time: 8e-07 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Merge Sort
+Running Time: 3.7e-06 seconds
 Mariam
 69712
 3.7

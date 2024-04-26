@@ -11,19 +11,20 @@
 using namespace std;
 class Student{
  private:
-     std::string name,id;
+     string name,id;
      double gpa;
  public:
- Student();
- Student(std::string& x,std::string& y,double& z){
+ Student() : name(""), id(""), gpa(0.0) {} // Default constructor implementation
+;
+ Student(string& x,string& y,double& z){
  name=x;
  id=y;
  gpa=z;
  }
- std::string get_name(){
+ string get_name(){
   return name;
  }
- std::string get_id(){
+ string get_id(){
   return id;
  }
   double get_gpa(){
@@ -32,37 +33,57 @@ class Student{
   bool operator<(Student sn){
         return (name < sn.name);
     }
+  bool operator<=(const Student& sn){
+        return (name <= sn.name);
+    }
 
     bool operator>(Student sg){
-        return (gpa > sg.gpa);
+        return (gpa > sg.gpa);//
+    }
+    bool operator>=(const Student& sg){
+        return (gpa >= sg.gpa);
+    }
+    void operator=(Student sg){
+        (gpa = sg.gpa);
+        (id = sg.id);
+        (name= sg.name);
     }
 };
-std::vector<Student> read_student_data(){
-std::fstream sfile("student.txt",ios::in|ios::out|ios::app);
+vector<Student> read_student_data(){
+fstream sfile("student.txt",ios::in|ios::out|ios::app);
  ll no_student;
  sfile>>no_student;
- std::vector<Student>st;
+ vector<Student>st;
  for(int i=0;i<no_student;i++){
-  std::string name,id;
+  string name,id;
   double gpa;
         sfile.ignore();
-        std::getline(sfile, name);
-        std::getline(sfile, id);
+        getline(sfile, name);
+        getline(sfile, id);
         sfile>>gpa;
         st.push_back(Student(name,id,gpa));
  }
  return st;
 }
 template<typename Func, class T>
-double measure_time(Func func, std::vector<T>& arr) {
-    auto start = std::chrono::high_resolution_clock::now(); // Get the current time before executing the function
+double measure_time(Func func, vector<T>& arr) {
+    auto start = chrono::high_resolution_clock::now(); // Get the current time before executing the function
     func(arr); // Execute the provided function
-    auto end = std::chrono::high_resolution_clock::now(); // Get the current time after executing the function
-    std::chrono::duration<double> duration = end - start; // Calculate the time difference in milliseconds
+    auto end = chrono::high_resolution_clock::now(); // Get the current time after executing the function
+    chrono::duration<double> duration = end - start; // Calculate the time difference in milliseconds
+    return duration.count();
+}
+
+template<typename Func, class T>
+double measure_time(Func func, vector<T>& arr,int l,int r) {
+    auto start = chrono::high_resolution_clock::now(); // Get the current time before executing the function
+    func(arr,l,r); // Execute the provided function
+    auto end = chrono::high_resolution_clock::now(); // Get the current time after executing the function
+    chrono::duration<double> duration = end - start; // Calculate the time difference in milliseconds
     return duration.count();
 }
 template<class T>
-void insertion_sort_gpa(std::vector<T>& arr) {
+void insertion_sort_gpa(vector<T>& arr) {
     int n = arr.size();
     if (n <= 1) return; // No need to sort if there is only one element or less
     int j;
@@ -77,7 +98,7 @@ void insertion_sort_gpa(std::vector<T>& arr) {
     }
 }
 template<class T>
-void insertion_sort_name(std::vector<T>& arr) {
+void insertion_sort_name(vector<T>& arr) {
     int n = arr.size();
     int j;
     for (int i = 1; i < n; i++) {
@@ -91,34 +112,34 @@ void insertion_sort_name(std::vector<T>& arr) {
     }
 }
 void print_insertion_sort(){
-  std::fstream sfile("student.txt",ios::in|ios::out);
+  fstream sfile("student.txt",ios::in|ios::out);
   if(sfile){
-  std::vector<Student>st= read_student_data();
+  vector<Student>st= read_student_data();
     ofstream writer_name("SortedByName.txt",ios::app);
     insertion_sort_name(st);
     if(writer_name){
         double time_taking_name = measure_time(insertion_sort_name<Student>, st);
-        std::cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
+        cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
         writer_name<<"Algorithm: Insertion Sort\n";
         writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
     for (auto& it : st) {
-        std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+        cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_name<< it.get_name() << endl;
         writer_name<< it.get_id() << endl;
         writer_name<< it.get_gpa() << endl;
     }
     }
     else cout<<"Error: SortedByName file\n";
-    std::cout<<"|||\n";
+    cout<<"|||\n";
     ofstream writer_gpa("SortedByGPA.txt",ios::app);
    insertion_sort_gpa(st);
     if(writer_gpa){
         double time_taking_gpa = measure_time(insertion_sort_gpa<Student>, st);
-        std::cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+        cout<<"Algorithm: Insertion Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
         writer_gpa<<"Algorithm: Insertion Sort\n";
         writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
     for (auto& it : st) {
-       std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+       cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_gpa<< it.get_name() << endl;
         writer_gpa<< it.get_id() << endl;
         writer_gpa<< it.get_gpa() << endl;
@@ -156,7 +177,7 @@ void selection_sort_descending(vector<T>& arr){//from higher to lower
     }
 }
 template<class T>
-void Bubble_sort_gpa(std::vector<T>& arr) {
+void Bubble_sort_gpa(vector<T>& arr) {
     int n = arr.size();
     bool flag = true;
 
@@ -174,7 +195,7 @@ void Bubble_sort_gpa(std::vector<T>& arr) {
 }
 }
 template<class T>
-void Bubble_sort_name(std::vector<T>& arr) {
+void Bubble_sort_name(vector<T>& arr) {
     int n = arr.size();
     bool flag = true;
 
@@ -192,7 +213,7 @@ void Bubble_sort_name(std::vector<T>& arr) {
     }
 }
 template<class T>
-void shell_sort_gpa(std::vector<T>& arr){
+void shell_sort_gpa(vector<T>& arr){
    int n = arr.size(),j;
    for(int gap=n/2;gap>0;gap/=2){
     for(int i=gap;i<n;i++){
@@ -207,7 +228,7 @@ void shell_sort_gpa(std::vector<T>& arr){
    }
 }
 template<class T>
-void shell_sort_name(std::vector<T>& arr){
+void shell_sort_name(vector<T>& arr){
    int n = arr.size(),j;
    for(int gap=n/2;gap>0;gap/=2){
     for(int i=gap;i<n;i++){
@@ -221,35 +242,185 @@ void shell_sort_name(std::vector<T>& arr){
     }
    }
 }
-void print_shell_sort(){
-std::fstream sfile("student.txt",ios::in|ios::out);
+template<class T>
+void merge_name(vector<T>& arr,int left,int middle,int right) {
+    int n1=middle-left+1;//+1 to avoid if two array not equle each other
+    int n2=right-middle;
+    vector<T>l(n1);
+    vector<T>r(n2);
+    for(int i=0;i<n1;i++)
+    {
+        l[i]=arr[left+i];
+    }
+    for(int j=0;j<n2;j++)
+    {
+        r[j]=arr[middle+1+j];
+    }
+    int i=0,j=0;
+    int k=left;
+    while(i<n1&&j<n2)
+    {
+        if(l[i]<=r[j]){
+            arr[k]=l[i];
+            ++i;
+        }
+        else{
+            arr[k]=r[j];
+            j++;
+        }
+        ++k;
+    }
+    while(i<n1)
+    {
+        arr[k]=l[i];
+        ++k;
+        ++i;
+    }
+    while(j<n2)
+    {
+        arr[k]=r[j];
+        ++k;
+        ++j;
+    }
+
+}
+template<class T>
+void merge_Gpa(vector<T>& arr,int left,int middle,int right) {
+    int n1=middle-left+1;//+1 to avoid if two array not equle each other
+    int n2=right-middle;
+    vector<T>l(n1);
+    vector<T>r(n2);
+    for(int i=0;i<n1;i++)
+    {
+        l[i]=arr[left+i];
+    }
+    for(int j=0;j<n2;j++)
+    {
+        r[j]=arr[middle+1+j];
+    }
+    int i=0,j=0;
+    int k=left;
+    while(i<n1&&j<n2)
+    {
+        if(l[i]>=r[j]){
+            arr[k]=l[i];
+            ++i;
+        }
+        else{
+            arr[k]=r[j];
+            j++;
+        }
+        ++k;
+    }
+    while(i<n1)
+    {
+        arr[k]=l[i];
+        ++k;
+        ++i;
+    }
+    while(j<n2)
+    {
+        arr[k]=r[j];
+        ++k;
+        ++j;
+    }
+
+}
+
+template<class T>
+void merge_Sort_name(vector<T>& arr,int left,int right) {
+    if(left<right){
+        int m;
+        m=left+(right-left)/2;//-1 to reach to base case
+        merge_Sort_name(arr,left,m);
+        merge_Sort_name(arr,m+1,right);
+        merge_name(arr,left,m,right);
+
+    }
+
+}
+template<class T>
+void merge_Sort_Gpa(vector<T>& arr,int left,int right) {
+    if(left<right){
+        int m;
+        m=left+(right-left)/2;//+left to know idex after we know middle
+        merge_Sort_Gpa(arr,left,m);
+        merge_Sort_Gpa(arr,m+1,right);
+        merge_Gpa(arr,left,m,right);
+
+    }
+
+}
+
+void print_merge_sort(){
+fstream sfile("student.txt",ios::in|ios::out);
   if(sfile){
-  std::vector<Student>st=read_student_data();
+  vector<Student>st=read_student_data();
+   int r=st.size();
     ofstream writer_name("SortedByName.txt",ios::app);
-    shell_sort_name(st);
+    merge_Sort_name(st,0,r-1);
     if(writer_name){
-        double time_taking_name = measure_time(shell_sort_name<Student>, st);
-        std::cout<<"Algorithm: Shell Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
-        writer_name<<"Algorithm: Shell Sort\n";
+        double time_taking_name = measure_time(merge_Sort_name<Student>, st,0,r-1);
+        cout<<"Algorithm: Merge Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
+        writer_name<<"Algorithm: Merge Sort\n";
         writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
     for (auto& it : st) {
-        std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+        cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_name<< it.get_name() << endl;
         writer_name<< it.get_id() << endl;
         writer_name<< it.get_gpa() << endl;
     }
     }
     else cout<<"Error: SortedByName file\n";
-    std::cout<<"|||\n";
+    cout<<"|||\n";
+    ofstream writer_gpa("SortedByGPA.txt",ios::app);
+  merge_Sort_Gpa(st,0,r-1);
+    if(writer_gpa){
+        double time_taking_gpa = measure_time(merge_Sort_Gpa<Student>, st,0,r-1);
+        cout<<"Algorithm: Merge Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+        writer_gpa<<"Algorithm: Merge Sort\n";
+        writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+    for (auto& it : st) {
+       cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
+        writer_gpa<< it.get_name() << endl;
+        writer_gpa<< it.get_id() << endl;
+        writer_gpa<< it.get_gpa() << endl;
+      }
+    }
+    else cout<<"Error: SortedByGPA file\n";
+  }
+  else cout<<"Error: student file\n";
+  sfile.close();
+}
+void print_shell_sort(){
+fstream sfile("student.txt",ios::in|ios::out);
+  if(sfile){
+  vector<Student>st=read_student_data();
+    ofstream writer_name("SortedByName.txt",ios::app);
+    shell_sort_name(st);
+    if(writer_name){
+        double time_taking_name = measure_time(shell_sort_name<Student>, st);
+        cout<<"Algorithm: Shell Sort\n"<<"Running Time: "<<time_taking_name<<" seconds\n";
+        writer_name<<"Algorithm: Shell Sort\n";
+        writer_name<<"Running Time: "<<time_taking_name<<" seconds\n";
+    for (auto& it : st) {
+        cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
+        writer_name<< it.get_name() << endl;
+        writer_name<< it.get_id() << endl;
+        writer_name<< it.get_gpa() << endl;
+    }
+    }
+    else cout<<"Error: SortedByName file\n";
+    cout<<"|||\n";
     ofstream writer_gpa("SortedByGPA.txt",ios::app);
    shell_sort_gpa(st);
     if(writer_gpa){
         double time_taking_gpa = measure_time(shell_sort_gpa<Student>, st);
-        std::cout<<"Algorithm: shell Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
+        cout<<"Algorithm: shell Sort\n"<<"Running Time: "<<time_taking_gpa<<" seconds\n";
         writer_gpa<<"Algorithm: shell Sort\n";
         writer_gpa<<"Running Time: "<<time_taking_gpa<<" seconds\n";
     for (auto& it : st) {
-       std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+       cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
         writer_gpa<< it.get_name() << endl;
         writer_gpa<< it.get_id() << endl;
         writer_gpa<< it.get_gpa() << endl;
@@ -261,34 +432,34 @@ std::fstream sfile("student.txt",ios::in|ios::out);
   sfile.close();
 }
 void print_Bubble_sort() {
-    std::fstream sfile("student.txt", ios::in | ios::out);
+    fstream sfile("student.txt", ios::in | ios::out);
     if (sfile) {
-        std::vector<Student>st = read_student_data();
+        vector<Student>st = read_student_data();
         ofstream writer_name("SortedByName.txt", ios::app);
        Bubble_sort_name(st);
         if (writer_name) {
             double time_taking_name = measure_time(Bubble_sort_name<Student>, st);
-            std::cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_name << " seconds\n";
+            cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_name << " seconds\n";
             writer_name << "Algorithm: Bubble Sort\n";
             writer_name << "Running Time: " << time_taking_name << " seconds\n";
             for (auto& it : st) {
-                std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+                cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_name << it.get_name() << endl;
                 writer_name << it.get_id() << endl;
                 writer_name << it.get_gpa() << endl;
             }
         }
         else cout << "Error: SortedByName file\n";
-        std::cout << "|||\n";
+        cout << "|||\n";
         ofstream writer_gpa("SortedByGPA.txt", ios::app);
         Bubble_sort_gpa(st);
         if (writer_gpa) {
             double time_taking_gpa = measure_time(Bubble_sort_gpa<Student>, st);
-            std::cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_gpa << " seconds\n";
+            cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_gpa << " seconds\n";
             writer_gpa << "Algorithm: Bubble Sort\n";
             writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
             for (auto& it : st) {
-                std::cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << std::endl;
+                cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_gpa << it.get_name() << endl;
                 writer_gpa << it.get_id() << endl;
                 writer_gpa << it.get_gpa() << endl;
@@ -348,5 +519,5 @@ int main()
    print_selection_sort();
    print_Bubble_sort();
    print_shell_sort();
-    return 0;
+   print_merge_sort();
 }
