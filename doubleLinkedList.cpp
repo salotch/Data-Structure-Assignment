@@ -14,7 +14,7 @@ class doubleLinkedList{
     node<T>*tail;
     int Size;
 public:
-    doubleLinkedList():head(nullptr), tail(nullptr),Size(0){}
+    doubleLinkedList():head(nullptr), tail(nullptr),Size(-1){}
 
     void insertAtHead(T element){
         node<T>* newnode = new node<T>;
@@ -68,6 +68,7 @@ public:
             newnode->data = element;
             for(int i = 0; i < index; i++)
                 curr = curr->next;
+
             newnode->next = curr->next;
             newnode->prev = curr;
             curr->next = newnode;
@@ -95,7 +96,7 @@ public:
 
         //return;
     }
-    void removeATTail(){
+    void removeAtTail(){
         if (tail == nullptr) {
             cout << "List is empty\n";
             return;
@@ -125,7 +126,7 @@ public:
         if(index == 0)
             removeAtHead();
         else if(index == Size)
-            removeATTail();
+            removeAtTail();
         else{
             node<T>* curr = head;
             for(int i = 0; i < index; i++)
@@ -133,6 +134,7 @@ public:
 
             curr->prev ->next = curr->next;
             curr->next -> prev = curr->prev;
+            delete curr;
             Size--;
         }
     }
@@ -142,7 +144,7 @@ public:
             cout << "Invalid index\n";
             return -1;
         }
-        if(index > Size){
+        if(index >= Size){
             cout << "Out of range\n";
             return -1;
         }
@@ -202,7 +204,7 @@ public:
             cout << "Invalid indices\n";
             return;
         }
-        if ( firstItemIdx >= Size || secondItemIdx >= Size) {
+        if ( firstItemIdx > Size || secondItemIdx > Size) {
             cout << "Out of range\n";
             return;
         }
@@ -227,7 +229,7 @@ public:
     }
 
     int DLL_is_size(){
-        return Size;
+        return Size+1;
     }
 
     void Clear(){
@@ -255,9 +257,11 @@ int main()
 {
     doubleLinkedList<int> dll;
     dll.insertAtHead(1);
+    dll.insertAtTail(2);
     dll.insertAtTail(3);
-    dll.insertAt(2, 1);
-    dll.print(); // Output: 1 2 3
+    dll.insertAtTail(5);
+    dll.insertAt(4, 3);
+    dll.print(); // Output: 1 2 3 4 5
     cout << "Size: " << dll.DLL_is_size() << endl; // Output: 3
     dll.removeAt(1);
     dll.print(); // Output: 1 3
