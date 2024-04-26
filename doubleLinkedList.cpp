@@ -175,6 +175,7 @@ public:
         while(curr != nullptr){
             if(curr->data == element)
                 return true;
+            curr = curr->next;
         }
         return false;
     }
