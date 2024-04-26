@@ -281,8 +281,9 @@ int main()
 {
     doubleLinkedList<int> dll;
     dll.insertAtHead(1);
-    dll.insertAtTail(2);
     dll.insertAtTail(3);
+    dll.insertAtTail(2);
+    dll.Swap(1, 2);
     dll.insertAtTail(5);
     dll.insertAt(4, 3);
     dll.print(); // Output: 1 2 3 4 5
@@ -294,7 +295,7 @@ int main()
     cout << "Is 3 in the list: " << dll.isExist(3) << endl; // Output: 1 (true)
     cout << "Is element at index 1 equal to 3: " << dll.isItemAtEqual(3, 1) << endl; // Output: 1 (true)
     dll.Swap(0, 1);
-    dll.print(); // Output: 3 1
+    dll.print(); // Output: 3 1 5 4
     dll.Clear();
     cout << "Is the list empty: " << dll.isEmpty() << endl; // Output: 1 (true)
     return 0;
