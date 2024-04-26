@@ -25,12 +25,11 @@ int pop(){
   return arr[Top--];
  }
 }
-int get_top(int& stack_top){
+int get_top(){
 
     if(is_Empty())cout<<"stack is Empty\n";
     else{
-        stack_top=arr[Top];
-        return stack_top;
+        return arr[Top];
  }
 }
 int StackSize(){
@@ -64,8 +63,7 @@ void Stack_List(){
     cout<<"size: "<<obj.StackSize()<<"\n";
     obj.pop();
     obj.print();
-    int x=0;
-    cout<<"Top: "<<obj.get_top(x)<<"\n";
+    cout<<"Top: "<<obj.get_top()<<"\n";
     obj.Clear();
     obj.print();
 }
@@ -154,6 +152,5 @@ int main()
     Stack_List();
     cout<<"\n";
     stack_linked_list();
-
     return 0;
 }
