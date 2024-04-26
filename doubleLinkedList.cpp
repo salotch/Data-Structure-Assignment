@@ -219,9 +219,33 @@ public:
         for(int i = 0; i < secondItemIdx; i++)
             secondNode = secondNode->next;
 
-        T temp = firstNode->data;
-        firstNode->data = secondNode->data;
-        secondNode->data = temp;
+        if (firstNode == head)
+            head = secondNode;
+        else if (secondNode == head)
+            head = firstNode;
+        if (firstNode == tail)
+            tail = secondNode;
+        else if (secondNode == tail)
+            tail = firstNode;
+
+        node<T>* temp;
+        temp = firstNode->next;
+        firstNode->next = secondNode->next;
+        secondNode->next = temp;
+
+        if (firstNode->next != NULL)
+            firstNode->next->prev = firstNode;
+        if (secondNode->next != NULL)
+            secondNode->next->prev = secondNode;
+
+        temp = firstNode->prev;
+        firstNode->prev = secondNode->prev;
+        secondNode->prev = temp;
+
+        if (firstNode->prev != NULL)
+            firstNode->prev->next = firstNode;
+        if (secondNode->prev != NULL)
+            secondNode->prev->next = secondNode;
     }
 
     bool isEmpty(){
