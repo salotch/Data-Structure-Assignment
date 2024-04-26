@@ -82,3 +82,175 @@ Sara Ahmed
 Mohamed Kamal
 97848
 2.2
+Algorithm: Insertion Sort
+Running Time: 8e-07 seconds
+Number of comparisons in insertion sort by GPA: 10
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: selection Sort by GPA 
+Running Time: 1.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Bubble Sort
+Running Time: 6e-07 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: shell Sort
+Running Time: 1.5e-06 seconds
+Number of comparisons in shell sort by GPA: 18
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Merge Sort
+Running Time: 6.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: quick Sort by GPA 
+Running Time: 2.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Insertion Sort
+Running Time: 6e-07 seconds
+Number of comparisons in insertion sort by GPA: 10
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: selection Sort by GPA 
+Running Time: 1.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Bubble Sort
+Running Time: 2e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: shell Sort
+Running Time: 2.2e-06 seconds
+Number of comparisons in shell sort by GPA: 18
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: Merge Sort
+Running Time: 6.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2
+Algorithm: quick Sort by GPA 
+Running Time: 2.5e-06 seconds
+Mariam
+69712
+3.7
+Ali
+3541
+3.5
+Sara Ahmed
+78697
+3.1
+Mohamed Kamal
+97848
+2.2

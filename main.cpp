@@ -186,22 +186,27 @@ void selection_sort_descending(vector<T>& arr){//from higher to lower
     swap(arr[i], arr[mini]);
     }
 }
+
+int Bubble_GPA_comparisons=0;
+int Bubble_Name_comparisons=0;
 template<class T>
 void Bubble_sort_gpa(vector<T>& arr) {
     int n = arr.size();
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {
+        Bubble_GPA_comparisons++;
     for (int j = 0; j < n - i - 1; j++)
-    {
+    {    Bubble_GPA_comparisons++;
         if (arr[j+1] > arr[j])
-        {
+        {   Bubble_GPA_comparisons++;
             swap(arr[j], arr[j + 1]);
             flag = false;
         }
     }
     if (flag == true)
-        break;
+      {   Bubble_GPA_comparisons++;
+        break;}
 }
 }
 template<class T>
@@ -210,16 +215,18 @@ void Bubble_sort_name(vector<T>& arr) {
     bool flag = true;
 
     for (int i = 0; i < n - 1; i++) {
+        Bubble_Name_comparisons++;
         for (int j = 0; j < n - i - 1; j++)
-        {
+        {  Bubble_Name_comparisons++;
             if (arr[j+1] < arr[j])
-            {
+            { Bubble_Name_comparisons++;
                 swap(arr[j], arr[j + 1]);
                 flag = false;
             }
         }
          if (flag == true)
-            break;
+          { Bubble_Name_comparisons++;
+             break;}
     }
 }
 int comparison_shell_name=0;
@@ -464,6 +471,8 @@ void print_Bubble_sort() {
             cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_name << " seconds\n";
             writer_name << "Algorithm: Bubble Sort\n";
             writer_name << "Running Time: " << time_taking_name << " seconds\n";
+            std::cout << "Number of comparisons in Bubble sort by name: " << Bubble_Name_comparisons << std::endl;
+          writer_name<<"Number of comparisons in Bubble sort by name: " << Bubble_Name_comparisons << std::endl;
             for (auto& it : st) {
                 cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_name << it.get_name() << endl;
@@ -480,6 +489,8 @@ void print_Bubble_sort() {
             cout << "Algorithm: Bubble Sort\n" << "Running Time: " << time_taking_gpa << " seconds\n";
             writer_gpa << "Algorithm: Bubble Sort\n";
             writer_gpa << "Running Time: " << time_taking_gpa << " seconds\n";
+            std::cout << "Number of comparisons in Bubble sort by GPA: " << Bubble_GPA_comparisons << std::endl;
+          writer_name<<"Number of comparisons in Bubble sort by GPA: " << Bubble_GPA_comparisons << std::endl;
             for (auto& it : st) {
                 cout << it.get_name() << " " << it.get_id() << " " << it.get_gpa() << endl;
                 writer_gpa << it.get_name() << endl;
