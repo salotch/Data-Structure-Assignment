@@ -21,10 +21,10 @@ public:
     void setCategory(string y){category=y;}
     void setPrice(int z){price=z;}
     bool operator==(Item &other){
-        return ((itemName == other.itemName )&& (category == other.category) &&( price == other.price));
+        return ((this->itemName == other.itemName )&& (this->category == other.category) &&( this->price == other.price));
     }
     bool operator>(Item &other){
-        return (price > other.price);
+        return (this->price > other.price);
     }
     void print(){
         cout<<"Item name is: "<<itemName<<"\n"<<"Category is: "<<category<<"\n"<<"Price is: "<<price<<"\n";
@@ -75,7 +75,7 @@ class BST{
     }
    }
    void Clear(TreeNode* p){
-      if(p!=nullptr){
+      if(p!=NULL){
         Clear(p->left);
         Clear(p->right);
         delete p;
@@ -183,8 +183,10 @@ class BST{
     bool search(Item &item){
         TreeNode *current = root;
         while (current !=  NULL) {
-            if (current->item == item)
+                //cout << "Comparing with item: " << current->item.getName() << ", " << current->item.getCategory() << ", " << current->item.getPrice() << endl;
+            if (current->item==item){
                 return true;
+            }
             else if (current->item > item)
                 current = current->left;
             else
@@ -199,8 +201,10 @@ class BST{
         bool found = false;
 
         while (current != NULL && !found) {
-            if (current->item == item)
-                found = true;
+                //cout << "Comparing with item: " << current->item.getName() << ", " << current->item.getCategory() << ", " << current->item.getPrice() << endl;
+            if (current->item==item){
+                found = true;break;
+            }
             else {
                 trailCurrent = current;
                 if (current->item > item)
@@ -229,6 +233,9 @@ class BST{
 int main(){
     vector<Item>it=ReadItem();
     BST b;
+    /*for(auto& i:it){
+         cout<<i.getName()<<i.getCategory()<<i.getPrice() << endl;
+    }*/
     for (auto &item : it) {
         b.AddItem(item);
     }
@@ -236,14 +243,17 @@ int main(){
       meat
       90
  */
- Item itemDelete("apples","fruit",66);
+ cout<<" * Print tree Inorder *\n";
+    b.inorderTraversal();
+    cout<<"***********************\n";
+ Item itemDelete(" apples"," fruit",66);
+    if(b.search(itemDelete))cout<<"Yes,the Item is Found\n";
+    else cout<<"No,The Item is not Found\n";
     cout << "Deleting item:\n";
     itemDelete.print();
     b.deleteItem(itemDelete);
     if(b.isEmpty())cout<<"YES, Tree IS Empty.\n";
     else cout<<"NO, Tree Have Item. \n";
-    /*if(b.search(itemDelete))cout<<"yes\n";
-    else cout<<"no\n";*/
     cout<<" * Print tree Inorder *\n";
     b.inorderTraversal();
     cout<<"\n * Print tree Preorder *\n";
