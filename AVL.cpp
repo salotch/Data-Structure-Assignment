@@ -1,210 +1,181 @@
-//
-// Created by DELL on 5/18/2024.
-//
-
-
-
-// AVL tree implementation in C++
-
+#include <algorithm>
 #include <iostream>
 using namespace std;
 
+class Item{
+private:
+    string itemName;
+    string category;
+    int price;
+public:
+    Item(string x,string y,int z){
+        itemName=x;
+        category=y;
+        price=z;
+    }
+    Item(){}
+    string getName(){return itemName;}
+    string getCategory(){return category;}
+    int getPrice(){return price;}
+    void setName(string x){itemName=x;}
+    void setCategory(string y){category=y;}
+    void setPrice(int z){price=z;}
+    bool operator==(Item &other){
+        return ((this->itemName == other.itemName )&& (this->category == other.category) &&( this->price == other.price));
+    }
+    bool operator<(Item &other){
+        return(this->itemName<other.itemName);
+    }
+    bool operator>(Item &other){
+        return (this->price > other.price);
+    }
+    void print(){
+        cout<<"Item name is: "<<itemName<<"\n"<<"Category is: "<<category<<"\n"<<"Price is: "<<price<<"\n";
+    }
+};
+
+template<class t>
 class Node {
 public:
-    int key;
+    t data;
     Node *left;
     Node *right;
     int height;
+    Node(){
+        right=left= nullptr;
+        height=1;
+    }
+
 };
+template<class t>
+class AVL{
+Node<t> *root;
 
-int max(int a, int b);
-
-// Calculate height
-int height(Node *N) {
-    if (N == NULL)
+int height(Node<t>* n){
+    if(n == nullptr)
         return 0;
-    return N->height;
+    return  n->height;
 }
-
-int max(int a, int b) {
-    return (a > b) ? a : b;
+int getBalance(Node<t>*n)
+{
+    if(n==nullptr)
+        return 0;
+    return height(n->left)- height(n->right);
 }
+Node<t>* rightRotate(Node<t>* y)
+{
+    Node<t> *x=y->left;
+    Node<t> *temp=x->right;
 
-// New node creation
-Node *newNode(int key) {
-    Node *node = new Node();
-    node->key = key;
-    node->left = NULL;
-    node->right = NULL;
-    node->height = 1;
-    return (node);
-}
+    x->right=y;
+    y->left=temp;
 
-// Rotate right
-Node *rightRotate(Node *y) {
-    Node *x = y->left;
-    Node *T2 = x->right;
-    x->right = y;
-    y->left = T2;
-    y->height = max(height(y->left),
-                    height(y->right)) +
-                1;
-    x->height = max(height(x->left),
-                    height(x->right)) +
-                1;
+    y->height= 1+max(height(y->left), height(y->right));
+    x->height= 1+max(height(x->left), height(x->right));
+
     return x;
 }
 
-// Rotate left
-Node *leftRotate(Node *x) {
-    Node *y = x->right;
-    Node *T2 = y->left;
-    y->left = x;
-    x->right = T2;
-    x->height = max(height(x->left),
-                    height(x->right)) +
-                1;
-    y->height = max(height(y->left),
-                    height(y->right)) +
-                1;
-    return y;
-}
+Node<t>* leftRotate(Node<t>* y){
 
-// Get the balance factor of each node
-int getBalanceFactor(Node *N) {
-    if (N == NULL)
-        return 0;
-    return height(N->left) -
-           height(N->right);
-}
 
-// Insert a node
-Node *insertNode(Node *node, int key) {
-    // Find the correct postion and insert the node
-    if (node == NULL)
-        return (newNode(key));
-    if (key < node->key)
-        node->left = insertNode(node->left, key);
-    else if (key > node->key)
-        node->right = insertNode(node->right, key);
+    Node<t> *x=y->right;
+    Node<t> *temp=x->left;
+
+    x->left=y;
+    y->right=temp;
+
+    y->height= 1+max(height(y->left), height(y->right));
+    x->height= 1+max(height(x->left), height(x->right));
+
+    return x;
+
+}
+Node<t>* insertHelper(Node<t>* node,int key) {
+
+    if (node == nullptr) {
+        auto newNode = new Node<t>;
+        newNode->data = key;
+        return newNode;
+    }
+    if (key < node->data)
+    {
+        node->left= insertHelper(node->left,key);
+    }
+    else if(key>node->data)
+    {
+     node->right = insertHelper(node->right,key);
+    }
     else
-        return node;
+        return node;//to prevent multiplication in AVL
 
-    // Update the balance factor of each node and
-    // balance the tree
-    node->height = 1 + max(height(node->left),
-                           height(node->right));
-    int balanceFactor = getBalanceFactor(node);
-    if (balanceFactor > 1) {
-        if (key < node->left->key) {
-            return rightRotate(node);
-        } else if (key > node->left->key) {
-            node->left = leftRotate(node->left);
-            return rightRotate(node);
-        }
+    node->height=1+max(height(node->right), height(node->left));
+
+    int balance= getBalance(node);
+//rotations
+    if(balance>1 && key<node->left->data)
+        return rightRotate(node);
+
+    if(balance<-1 && key >node->right->data)
+        return leftRotate(node);
+
+    if (balance>1 && key >node->left->data)
+    {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
     }
-    if (balanceFactor < -1) {
-        if (key > node->right->key) {
-            return leftRotate(node);
-        } else if (key < node->right->key) {
-            node->right = rightRotate(node->right);
-            return leftRotate(node);
-        }
+    if (balance < -1 && key < node->right->data)
+    {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
     }
+
     return node;
 }
+void inorder(Node<t>* n)
+{
+    if(n != nullptr) {
 
-// Node with minimum value
-Node *nodeWithMimumValue(Node *node) {
-    Node *current = node;
-    while (current->left != NULL)
-        current = current->left;
-    return current;
-}
-
-// Delete a node
-Node *deleteNode(Node *root, int key) {
-    // Find the node and delete it
-    if (root == NULL)
-        return root;
-    if (key < root->key)
-        root->left = deleteNode(root->left, key);
-    else if (key > root->key)
-        root->right = deleteNode(root->right, key);
-    else {
-        if ((root->left == NULL) ||
-            (root->right == NULL)) {
-            Node *temp = root->left ? root->left : root->right;
-            if (temp == NULL) {
-                temp = root;
-                root = NULL;
-            } else
-                *root = *temp;
-            free(temp);
-        } else {
-            Node *temp = nodeWithMimumValue(root->right);
-            root->key = temp->key;
-            root->right = deleteNode(root->right,
-                                     temp->key);
-        }
-    }
-
-    if (root == NULL)
-        return root;
-
-    // Update the balance factor of each node and
-    // balance the tree
-    root->height = 1 + max(height(root->left),
-                           height(root->right));
-    int balanceFactor = getBalanceFactor(root);
-    if (balanceFactor > 1) {
-        if (getBalanceFactor(root->left) >= 0) {
-            return rightRotate(root);
-        } else {
-            root->left = leftRotate(root->left);
-            return rightRotate(root);
-        }
-    }
-    if (balanceFactor < -1) {
-        if (getBalanceFactor(root->right) <= 0) {
-            return leftRotate(root);
-        } else {
-            root->right = rightRotate(root->right);
-            return leftRotate(root);
-        }
-    }
-    return root;
-}
-
-// Print the tree
-void printTree(Node *root, string indent, bool last) {
-    if (root != nullptr) {
-        cout << indent;
-        if (last) {
-            cout << "R----";
-            indent += "   ";
-        } else {
-            cout << "L----";
-            indent += "|  ";
-        }
-        cout << root->key << endl;
-        printTree(root->left, indent, false);
-        printTree(root->right, indent, true);
+        inorder(n->left);
+        cout << n->data << " ";
+        inorder(n->right);
     }
 }
+    void des(Node<t>* n)
+    {
+        if(n != nullptr) {
 
-int main() {
-    Node *root = NULL;
-    root = insertNode(root, 33);
-    root = insertNode(root, 13);
-    root = insertNode(root, 53);
-    root = insertNode(root, 9);
-    root = insertNode(root, 21);
-    root = insertNode(root, 61);
-    root = insertNode(root, 8);
-    root = insertNode(root, 11);
-    printTree(root, "", true);
-    root = deleteNode(root, 13);
-    cout << "After deleting " << endl;
-    printTree(root, "", true);
+            des(n->right);
+            cout << n->data << " ";
+            des(n->left);
+        }
+    }
+public:
+    AVL(){
+        root= nullptr;
+    }
+    void insert(t val)
+    {
+        root = insertHelper(root,val);
+    }
+    void printAsc()
+    {
+        inorder(root);
+        cout<<endl;
+    }
+    void printDes()
+    {
+    des(root);
+        cout<<endl;
+    }
+};
+int main()
+{
+    AVL<int> tree;
+    tree.insert(10);
+    tree.insert(20);
+    tree.insert(30);
+    tree.insert(40);
+    tree.printAsc();
+    tree.printDes();
 }
