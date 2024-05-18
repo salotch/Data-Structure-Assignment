@@ -91,20 +91,20 @@ Node<t>* leftRotate(Node<t>* y){
     return x;
 
 }
-Node<t>* insertHelper(Node<t>* node,int key) {
+Node<t>* insertHelper(Node<t>* node,int data) {
 
     if (node == nullptr) {
         auto newNode = new Node<t>;
-        newNode->data = key;
+        newNode->data = data;
         return newNode;
     }
-    if (key < node->data)
+    if (data < node->data)
     {
-        node->left= insertHelper(node->left,key);
+        node->left= insertHelper(node->left,data);
     }
-    else if(key>node->data)
+    else if(data>node->data)
     {
-     node->right = insertHelper(node->right,key);
+        node->right = insertHelper(node->right,data);
     }
     else
         return node;//to prevent multiplication in AVL
@@ -113,18 +113,18 @@ Node<t>* insertHelper(Node<t>* node,int key) {
 
     int balance= getBalance(node);
 //rotations
-    if(balance>1 && key<node->left->data)
+    if(balance>1 && data<node->left->data)
         return rightRotate(node);
 
-    if(balance<-1 && key >node->right->data)
+    if(balance<-1 && data >node->right->data)
         return leftRotate(node);
 
-    if (balance>1 && key >node->left->data)
+    if (balance>1 && data >node->left->data)
     {
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
-    if (balance < -1 && key < node->right->data)
+    if (balance < -1 && data < node->right->data)
     {
         node->right = rightRotate(node->right);
         return leftRotate(node);
@@ -132,6 +132,59 @@ Node<t>* insertHelper(Node<t>* node,int key) {
 
     return node;
 }
+Node<t>* minValueNode(Node<t>*node)
+{
+    Node<t>* current = node;
+    while (current->left != NULL)
+        current = current->left;
+    return current;
+
+}
+Node<t>* deleteHelper(Node<t>* root,t data){
+    if(root==NULL)
+        return root;
+    if(data<root->data)
+        root->left = deleteHelper(root->left,data);
+    else if(data>root->data)
+        root->right =deleteHelper(root->right,data)  ;
+    else{
+        if((root->left == NULL)||(root->right == NULL)){
+            Node<t> *temp=root->left? root->left : root->right;
+            if (temp==NULL)
+            {
+                temp=root;
+                root=NULL;
+            }
+            else
+            *root = *temp;
+            free(temp);
+        }
+        else{
+            Node<t> *temp = minValueNode(root->right);
+            root->data = temp->data;
+            root->right = deleteHelper(root->right,temp->data);
+        }
+        }
+        if(root==NULL)
+        return root;
+        root->height =1 + max(height(root->left),height(root->right));
+        int balance = getBalance(root);
+        if(balance>1 && getBalance(root->left)>=0)
+        return rightRotate(root);
+        if(balance>1 && getBalance(root->left)<0)
+        {
+            root->left = leftRotate(root->left);
+            return rightRotate(root);
+        }
+        if(balance<-1 && getBalance(root->right)<=0)
+        return leftRotate(root);
+        if(balance<-1 && getBalance(root->left)>0)
+        {
+            root->right = rightRotate(root->right);
+            return leftRotate(root);
+        }
+        return root;
+    }
 void inorder(Node<t>* n)
 {
     if(n != nullptr) {
@@ -158,6 +211,10 @@ public:
     {
         root = insertHelper(root,val);
     }
+    void Delete(t val)
+    {
+        root = deleteHelper(root,val);
+    }
     void printAsc()
     {
         inorder(root);
@@ -176,6 +233,7 @@ int main()
     tree.insert(20);
     tree.insert(30);
     tree.insert(40);
+    tree.Delete(40);
     tree.printAsc();
     tree.printDes();
 }
