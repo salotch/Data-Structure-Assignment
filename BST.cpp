@@ -56,11 +56,18 @@ class BST{
     TreeNode* left,* right;
 };
    TreeNode* root;
-   void inorder(TreeNode* p){
+   void inorderAscending(TreeNode* p){
        if(p!=NULL){//left root right
-        inorder(p->left);
+        inorderAscending(p->left);
         p->item.print();
-        inorder(p->right);
+        inorderAscending(p->right);
+       }
+   }
+   void inorderDescending(TreeNode* p){//right root left
+        if(p!=NULL){//right root left
+        inorderDescending(p->right);
+        p->item.print();
+        inorderDescending(p->left);
        }
    }
    void preorder(TreeNode* p){//root left right
@@ -136,8 +143,11 @@ class BST{
     bool isEmpty(){
         return (root==NULL);
       }
-    void inorderTraversal(){
-        inorder(root);
+    void inorderTraversalAscending(){
+        inorderAscending(root);
+      }
+      void inorderTraversalDescending(){
+        inorderDescending(root);
       }
 	void preorderTraversal(){
 	     preorder(root);
@@ -321,13 +331,9 @@ void printPrice(){
     for (auto &item : it) {
         b.AddItemPrice(item);
     }
-    //Tuna
-      //meat
-      //90
-
- cout<<" * Print tree Inorder *\n";
-    b.inorderTraversal();
-    cout<<"***********************\n";
+    //apples
+      //fruit
+      //66
  Item itemDelete(" apples"," fruit",66);
     if(b.searchPrice(itemDelete))cout<<"Yes,the Item is Found\n";
     else cout<<"No,The Item is not Found\n";
@@ -337,8 +343,12 @@ void printPrice(){
     if(b.isEmpty())cout<<"YES, Tree IS Empty.\n";
     else cout<<"NO, Tree Have Item. \n";
     cout<<"***********************\n";
-    cout<<" * Print tree Inorder *\n";
-    b.inorderTraversal();
+    cout<<" ** Print tree Inorder == Ascending PRICE **\n";
+    b.inorderTraversalAscending();
+    cout<<"\n";
+    cout<<"***********************\n";
+    cout<<" ** Print tree REVERSE Inorder == Descending PRICE**\n";
+    b.inorderTraversalDescending();
     cout<<"***********************\n";
     cout<<"\n * Print tree Preorder *\n";
     b.preorderTraversal();
@@ -359,9 +369,6 @@ void printName(){
       //meat
       //90
 
- cout<<" * Print tree Inorder *\n";
-    b.inorderTraversal();
-    cout<<"***********************\n";
  Item itemDelete(" Tuna"," meat",90);
     if(b.searchName(itemDelete))cout<<"Yes,the Item is Found\n";
     else cout<<"No,The Item is not Found\n";
@@ -371,8 +378,12 @@ void printName(){
     if(b.isEmpty())cout<<"YES, Tree IS Empty.\n";
     else cout<<"NO, Tree Have Item. \n";
     cout<<"***********************\n";
-    cout<<" * Print tree Inorder *\n";
-    b.inorderTraversal();
+    cout<<" ** Print tree Inorder == Ascending NAME**\n";
+    b.inorderTraversalAscending();
+    cout<<"\n";
+    cout<<"***********************\n";
+    cout<<" ** Print tree REVERSE Inorder == Descending NAME**\n";
+    b.inorderTraversalDescending();
     cout<<"***********************\n";
     cout<<"\n * Print tree Preorder *\n";
     b.preorderTraversal();
@@ -387,6 +398,3 @@ int main(){
     printName();
     return 0;
 }
-
-
-
