@@ -27,9 +27,9 @@ public:
 
     void print()
     {
-        cout << "Item name is: " << itemName << "\n"
-             << "Category is: " << category << "\n"
-             << "Price is: " << price << "\n";
+        cout<< "Item name is: " << itemName << "\n"
+            << "Category is: " << category << "\n"
+            << "Price is: " << price << "\n";
     }
 
     bool operator<(Item &other)
@@ -66,7 +66,7 @@ class Price{
 
     vector<Item> heap;
 
-  public:
+public:
 
     void heapifyUp(int index){
         if (index == 0)
@@ -239,14 +239,14 @@ int main()
     heapName.insert(newItem);
 
     cout << "new item sorting by name :"
-         << " ice coffe, drink, 35" << endl;
+        << " ice coffe, drink, 35" << endl;
     while (!heapName.isEmpty()){
         Item maxItem = heapName.extractmaxx();
         maxItem.print();
     }
 
     cout << "---------------------------------------------\n"
-         << "---------------------------------------------" << endl;
+        << "---------------------------------------------" << endl;
 
     Price heapPrice;
     for (auto &item : items)
@@ -254,7 +254,7 @@ int main()
 
     heapPrice.insert(newItem);
     cout << "new item sorting by price : "
-         << "ice coffe, drink, 35" << endl;
+        << "ice coffe, drink, 35" << endl;
 
     while (!heapPrice.isEmpty()){
         Item maxItem = heapPrice.extractmaxx();
