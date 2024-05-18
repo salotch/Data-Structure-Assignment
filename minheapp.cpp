@@ -32,7 +32,7 @@ public:
              << "Price is: " << price << "\n";
     }
 
-    bool operator<(Item &other)
+   /* bool operator<(Item &other)
     {
         return this->price < other.price;
     }
@@ -40,7 +40,7 @@ public:
     bool operator>(Item &other)
     {
         return this->itemName > other.itemName;
-    }
+    }*/
 };
 
 vector<Item> ReadItem()
@@ -227,6 +227,24 @@ void display_Ascending_ByName(vector<Item> &items)
     }
 }
 
+void ItemdeletionFromList(vector<Item>& items,  Item& item)
+{
+    for (auto it = items.begin(); it != items.end(); ++it)
+    {
+        if (it->getName() == item.getName() && it->getCategory() == item.getCategory() && it->getPrice() == item.getPrice())
+        {
+            items.erase(it);
+            break;
+        }
+    }
+}
+
+
+void ItemAdditionToList(vector<Item>& items,  Item& newItem)
+{
+    items.push_back(newItem);
+}
+
 int main()
 {
     vector<Item> items = ReadItem();
@@ -279,6 +297,49 @@ int main()
         Item minItem = heapPrice.extractMin();
         minItem.print();
     }
+
+
+cout << "---------------------------------------------\n"
+         << "---------------------------------------------" << endl;
+
+   Item DeletedItem;
+cout << "Enter the details of the item for deletion:" << endl;
+string name, category;
+int price;
+cout << "Name: ";;
+cin >> name;
+cout<<endl;
+cout << "Category: ";
+cin >> category;
+cout<<endl;
+cout << "Price: ";
+cin >> price;
+cout<<endl;
+DeletedItem = Item(name, category, price);
+ItemdeletionFromList(items, DeletedItem);
+cout << "After deleting the specified item from the list:" << endl;
+Normally_displaying(items);
+
+cout << "---------------------------------------------\n"
+         << "---------------------------------------------" << endl;
+
+
+Item AddedItem;
+cout << "Enter the details of the new item:" << endl;
+string nameIt, categoryIt;
+int priceIt;
+cout << "Name: ";
+cin >> nameIt;
+cout << "Category: ";
+cin >> categoryIt;
+cout << "Price: ";
+cin >> priceIt;
+AddedItem = Item(nameIt, categoryIt, priceIt);
+items.push_back(AddedItem);
+cout << "New item added to the list:" << endl;
+Normally_displaying(items);
+
+
 
     return 0;
 }
