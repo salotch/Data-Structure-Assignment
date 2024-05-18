@@ -1,5 +1,4 @@
 #include "item.h"
-
 vector<Item> ReadItem( string filename){
     fstream ifile(filename, ios::in | ios::out | ios::app);
     long long no_item;
@@ -15,7 +14,6 @@ vector<Item> ReadItem( string filename){
         ifile >> price;
         it.push_back(Item(name, category, price));
     }
-
     return it;
 }
 template<class t>

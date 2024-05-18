@@ -43,4 +43,20 @@ public:
         cout<<"Item name is: "<<itemName<<"\n"<<"Category is: "<<category<<"\n"<<"Price is: "<<price<<"\n";
     }
 };
+vector<Item> ReadItem(){
+    fstream ifile("item.txt",ios::in|ios::out|ios::app);
+    ll no_item;
+    ifile>>no_item;
+    vector<Item> it;
+    for(int i=0;i<no_item;i++){
+        string name,category;
+        int price;
+        ifile.ignore();
+        getline(ifile,name);
+        getline(ifile,category);
+        ifile>>price;
+        it.push_back(Item(name,category,price));
+    }
+    return it;
+}
 #endif //DATA_STRUCTURE_ASSIGNMENTFINAL_ITEM_H
