@@ -383,8 +383,16 @@ void BSTmenu() {
             cout << "Enter item price: ";
             cin >> price;
             Item item(name,category, price);
-            treeByPrice.deleteItemPrice(item);
-            treeByName.deleteItemName(item);
+            if(treeByPrice.searchPrice(item)){
+                cout<<"Item is Found\n";
+                treeByPrice.deleteItemPrice(item);
+            }
+            else cout<<"Item is Not Found\n";
+            if(treeByName.searchName(item)){
+                  cout<<"Item is Found\n";
+                  treeByName.deleteItemName(item);
+            }
+            else cout<<"Item is Not Found\n";
         } else if (choose == '3') {
             cout << "\n** Retrieve all elements (preorder by insertion) **\n";
             treeByName.preorderTraversal();
