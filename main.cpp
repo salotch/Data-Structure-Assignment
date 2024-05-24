@@ -14,7 +14,7 @@ int main()
     }
     if(c==2)
     {
-        bstmenue();
+        BSTmenu();
         return 0;
     }
     if(c==3)
