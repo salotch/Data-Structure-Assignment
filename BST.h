@@ -272,97 +272,97 @@ public:
         }
     }
 };
-void printPrice(){
-    vector<Item>it=ReadItem();
-    BST b;
-    //for(auto& i:it){
-    //   cout<<i.getName()<<i.getCategory()<<i.getPrice() << endl;
-    //}
-    for (auto &item : it) {
-        b.AddItemPrice(item);
-    }
-    //apples
-    //fruit
-    //66
-    Item itemDelete(" apples"," fruit",66);
-    if(b.searchPrice(itemDelete))cout<<"Yes,the Item is Found\n";
-    else cout<<"No,The Item is not Found\n";
-    cout << "Deleting item:\n";
-    itemDelete.print();
-    b.deleteItemPrice(itemDelete);
-    if(b.isEmpty())cout<<"YES, Tree IS Empty.\n";
-    else cout<<"NO, Tree Have Item. \n";
-    cout<<"***********************\n";
-    cout<<" ** Print tree Inorder == Ascending PRICE **\n";
-    b.inorderTraversalAscending();
-    cout<<"\n";
-    cout<<"***********************\n";
-    cout<<" ** Print tree REVERSE Inorder == Descending PRICE**\n";
-    b.inorderTraversalDescending();
-    cout<<"***********************\n";
-    cout<<"\n * Print tree Preorder *\n";
-    b.preorderTraversal();
-    cout<<"***********************\n";
-    cout<<"\n * Print tree Postorder *\n";
-    b.postorderTraversal();
-}
-void printName(){
-    vector<Item>it=ReadItem();
-    BST b;
-    //for(auto& i:it){
-    //   cout<<i.getName()<<i.getCategory()<<i.getPrice() << endl;
-    //}
-    for (auto &item : it) {
-        b.AddItemName(item);
-    }
-    //Tuna
-    //meat
-    //90
+void BSTmenu(){
+    BST treeByPrice, treeByName;
+    cout << "Welcome to the Item Management System using BST\n";
+    while (true) {
+        cout << "Which operation do you want to perform:\n";
+        cout << "1. Insert element\n";
+        cout << "2. Delete element\n";
+        cout << "3. Retrieve all elements in the tree normally (by insertion order)\n";
+        cout << "4. Retrieve all elements in the tree ascending by item's name\n";
+        cout << "5. Retrieve all elements in the tree descending by item's name\n";
+        cout << "6. Retrieve all elements in the tree ascending by item's price\n";
+        cout << "7. Retrieve all elements in the tree descending by item's price\n";
+        cout << "8. Exit\n";
 
-    Item itemDelete(" Tuna"," meat",90);
-    if(b.searchName(itemDelete))cout<<"Yes,the Item is Found\n";
-    else cout<<"No,The Item is not Found\n";
-    cout << "Deleting item:\n";
-    itemDelete.print();
-    b.deleteItemName(itemDelete);
-    if(b.isEmpty())cout<<"YES, Tree IS Empty.\n";
-    else cout<<"NO, Tree Have Item. \n";
-    cout<<"***********************\n";
-    cout<<" ** Print tree Inorder == Ascending NAME**\n";
-    b.inorderTraversalAscending();
-    cout<<"\n";
-    cout<<"***********************\n";
-    cout<<" ** Print tree REVERSE Inorder == Descending NAME**\n";
-    b.inorderTraversalDescending();
-    cout<<"***********************\n";
-    cout<<"\n * Print tree Preorder *\n";
-    b.preorderTraversal();
-    cout<<"***********************\n";
-    cout<<"\n * Print tree Postorder *\n";
-    b.postorderTraversal();
-}
-void bstmenue(){
-
-    cout<<"Welcome to BST trees\n";
-    while (true)
-    { cout<<"which opperation you want to preform :\n";
-        cout<<"1.Retrieve all elements in the tree descending and ascending by the item's name."
-              "\n2.Retrieve all elements in the tree descending and ascending by the item's price."
-              "\n3.Exit\n";
         char choose;
-        cin>>choose;
-        if(choose == '1') {
-            cout<<"\n*********Price*********\n";
-            printPrice();
-        }
-        else if(choose=='2')
-        {
-            cout<<"\n*********Name*********\n";
-            printName();
-        }
-        else
-            break;
-    }
-    return ;
+        cin >> choose;
+        if (choose == '1') {//insert
+            int option=0;
+            do
+             {
+                cout << "1. Do you want to insert data from file\n";
+                cout << "2. Insert values manually\n";
+                cin >> option;
+            }while(option != 1 && option != 2);
+            if (option == 1) {//from file
+                vector<Item> it = ReadItem();
+                for (auto &item : it) {
+                    treeByPrice.AddItemPrice(item);
+                    treeByName.AddItemName(item);
+                }
+            } else {//manually
+                int num;
+                cout << "Enter number of items you want to insert: ";
+                cin >> num;
+                while (num--) {
+                    string name, category;
+                    int price;
+                    cout << "\nEnter item name: ";
+                    cin >> ws; // clear whitespace
+                    getline(cin,name);
+                    cout << "Enter item category: ";
+                    getline(cin,category);
+                    cout << "Enter item price: ";
+                    cin >> price;
 
+                    Item item(name, category, price);
+                    treeByPrice.AddItemPrice(item);
+                    treeByName.AddItemName(item);
+                }
+            }
+        } else if (choose == '2') {//delete
+            string name, category;
+            int price;
+            cout << "\nEnter item name: ";
+            cin >> ws; // clear whitespace
+            getline(cin,name);
+            cout << "Enter item category: ";
+            getline(cin,category);
+            cout << "Enter item price: ";
+            cin >> price;
+            Item item(name,category, price);
+            if(treeByPrice.searchPrice(item)){
+                cout<<"Item is Found\n";
+                treeByPrice.deleteItemPrice(item);
+            }
+            else cout<<"Item is Not Found\n";
+            if(treeByName.searchName(item)){
+                  cout<<"Item is Found\n";
+                  treeByName.deleteItemName(item);
+            }
+            else cout<<"Item is Not Found\n";
+        } else if (choose == '3') {
+            cout << "\n** Retrieve all elements (preorder by insertion) **\n";
+            treeByName.preorderTraversal();
+        } else if (choose == '4') {
+            cout << "\n** Retrieve all elements ascending by item's name **\n";
+            treeByName.inorderTraversalAscending();
+        } else if (choose == '5') {
+            cout << "\n** Retrieve all elements descending by item's name **\n";
+            treeByName.inorderTraversalDescending();
+        } else if (choose == '6') {
+            cout << "\n** Retrieve all elements ascending by item's price **\n";
+            treeByPrice.inorderTraversalAscending();
+        } else if (choose == '7') {
+            cout << "\n** Retrieve all elements descending by item's price **\n";
+            treeByPrice.inorderTraversalDescending();
+        } else if (choose == '8') {
+            break;
+        } else {
+            cout << "Invalid option, please try again.\n";
+        }
+    }
+    return;
 }
