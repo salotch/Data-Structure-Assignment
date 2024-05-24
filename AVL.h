@@ -156,19 +156,19 @@ class AVL{
         return node;
     }
     Node<t>* deleteHelper(Node<t>* root,t data){
-        if(root==NULL)
+        if(root==nullptr)
             return root;
         if(data < root->data)
             root->left = deleteHelper(root->left,data);
         else if(!(data <= root->data))
             root->right =deleteHelper(root->right,data)  ;
         else{
-            if((root->left == NULL)||(root->right == NULL)){
+            if((root->left == nullptr)||(root->right == nullptr)){
                 Node<t> *temp=root->left? root->left : root->right;
-                if (temp==NULL)
+                if (temp==nullptr)
                 {
                     temp=root;
-                    root=NULL;
+                    root=nullptr;
                 }
                 else
                     *root = *temp;
@@ -180,7 +180,52 @@ class AVL{
                 root->right = deleteHelper(root->right,temp->data);
             }
         }
-        if(root==NULL)
+        if(root==nullptr)
+            return root;
+        root->height =1 + max(height(root->left),height(root->right));
+        int balance = getBalance(root);
+        if(balance>1 && getBalance(root->left)>=0)
+            return rightRotate(root);
+        if(balance>1 && getBalance(root->left)<0)
+        {
+            root->left = leftRotate(root->left);
+            return rightRotate(root);
+        }
+        if(balance<-1 && getBalance(root->right)<=0)
+            return leftRotate(root);
+        if(balance<-1 && getBalance(root->left)>0)
+        {
+            root->right = rightRotate(root->right);
+            return leftRotate(root);
+        }
+        return root;
+    }
+    Node<t>* deleteHelperp(Node<t>* root,t data){
+        if(root==nullptr)
+            return root;
+        if(data > root->data)
+            root->right =deleteHelperp(root->right,data)  ;
+        else if(!(data >= root->data))
+            root->left = deleteHelperp(root->left,data);
+        else{
+            if((root->left == nullptr)||(root->right == nullptr)){
+                Node<t> *temp=root->left? root->left : root->right;
+                if (temp==nullptr)
+                {
+                    temp=root;
+                    root=nullptr;
+                }
+                else
+                    *root = *temp;
+                free(temp);
+            }
+            else{
+                Node<t> *temp = minValueNode(root->right);
+                root->data = temp->data;
+                root->right = deleteHelperp(root->right,temp->data);
+            }
+        }
+        if(root==nullptr)
             return root;
         root->height =1 + max(height(root->left),height(root->right));
         int balance = getBalance(root);
@@ -231,7 +276,7 @@ class AVL{
     Node<t>* minValueNode(Node<t>*node)
     {
         Node<t>* current = node;
-        while (current->left != NULL)
+        while (current->left != nullptr)
             current = current->left;
         return current;
 
@@ -266,6 +311,10 @@ public:
     void Delete(t val)
     {
         root = deleteHelper(root,val);
+    }
+    void Deletep(t val)
+    {
+        root = deleteHelperp(root,val);
     }
 };
 
@@ -340,8 +389,8 @@ void avlmenue() {
             i.setName(name);
             i.setCategory(cate);
             i.setPrice(price);
-            tree.Delete(i);
-            tree.Delete(i);
+            tree.Deletep(i);
+            tree2.Delete(i);
         }
         else if(choose=='3')
         {

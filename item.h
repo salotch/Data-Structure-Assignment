@@ -39,6 +39,9 @@ public:
     bool operator>(Item &other) {
         return (this->price > other.price);
     }
+    bool operator>=(Item &other) {
+        return (this->price >= other.price);
+    }
     void print(){
         cout<<"Item name is: "<<itemName<<"\n"<<"Category is: "<<category<<"\n"<<"Price is: "<<price<<"\n";
     }
