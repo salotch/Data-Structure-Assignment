@@ -409,7 +409,7 @@ int main(){
                 cin >> name >> category >> price;
                 Item newItem(name, category, price);
                 items.push_back(newItem);
-                cout << "New item added to the list:" << endl;
+                cout << "\n New item added to the list: \n" << endl;
                 Normally_displaying(items);
                 break;
             }
@@ -420,7 +420,7 @@ int main(){
                 cin >> name >> category >> price;
                 Item DeletedItem(name, category, price);
                 ItemdeletionFromList(items, DeletedItem);
-                cout << "New item added to the list:" << endl;
+                cout << "\n item deleted from the list:\n" << endl;
                 Normally_displaying(items);
                 break;
             }
