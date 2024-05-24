@@ -229,8 +229,10 @@ class AVL{
             return root;
         root->height =1 + max(height(root->left),height(root->right));
         int balance = getBalance(root);
+
         if(balance>1 && getBalance(root->left)>=0)
             return rightRotate(root);
+
         if(balance>1 && getBalance(root->left)<0)
         {
             root->left = leftRotate(root->left);
@@ -238,6 +240,7 @@ class AVL{
         }
         if(balance<-1 && getBalance(root->right)<=0)
             return leftRotate(root);
+
         if(balance<-1 && getBalance(root->left)>0)
         {
             root->right = rightRotate(root->right);
