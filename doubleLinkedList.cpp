@@ -66,14 +66,13 @@ public:
             node<T>* newnode = new node<T>;
             node<T>* curr = head;
             newnode->data = element;
-            for(int i = 0; i < index; i++)
+            for(int i = 1; i < index; i++)
                 curr = curr->next;
 
             newnode->next = curr->next;
-            newnode->prev = curr;
-            curr->next = newnode;
+            newnode->prev = curr;            
             curr->next->prev = newnode;
-
+            curr->next = newnode;
             Size++;
         }
         //return;
